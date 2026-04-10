@@ -1,0 +1,42 @@
+.dashboard-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-pending {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-warning-bg);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-warning);
+  animation: slideDown 0.3s ease;
+}
+
+.dashboard-pending-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-warning);
+  animation: pulse 2s infinite;
+}
+
+.dashboard-accounts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+.dashboard-section {
+  padding: var(--space-2) var(--space-4) var(--space-4);
+}
+
+.dashboard-activity-list {
+  background: var(--surface-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+}

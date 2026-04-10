@@ -1,0 +1,50 @@
+.blocked-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--surface-overlay);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+}
+
+.blocked-content {
+  background: var(--surface-card);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+  max-width: 360px;
+  width: 100%;
+}
+
+.blocked-icon-wrap {
+  width: 80px;
+  height: 80px;
+  background: var(--color-error-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-5);
+  color: var(--color-error);
+}
+
+.blocked-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-3);
+}
+
+.blocked-message {
+  font-size: var(--font-size-md);
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-6);
+}
+
+.blocked-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}

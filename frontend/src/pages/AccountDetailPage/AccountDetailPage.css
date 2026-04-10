@@ -1,0 +1,61 @@
+.account-detail-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.account-detail-header {
+  margin: var(--space-4);
+  border-radius: var(--radius-xl);
+}
+
+.account-detail-header-inner {
+  padding: var(--space-5);
+}
+
+.account-detail-name {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-2);
+}
+
+.account-detail-balance {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  margin-bottom: var(--space-1);
+}
+
+.account-detail-cents {
+  font-size: var(--font-size-lg);
+  vertical-align: super;
+}
+
+.account-detail-label {
+  font-size: var(--font-size-sm);
+  opacity: 0.8;
+}
+
+.account-detail-transactions {
+  padding: var(--space-4) 0;
+}
+
+.txn-date-group {
+  margin-bottom: var(--space-4);
+}
+
+.txn-date-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  padding: 0 var(--space-4) var(--space-2);
+}
+
+.txn-date-list {
+  background: var(--surface-card);
+}
+
+.account-detail-empty {
+  text-align: center;
+  color: var(--text-tertiary);
+  padding: var(--space-8);
+}

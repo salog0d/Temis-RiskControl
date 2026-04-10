@@ -1,0 +1,77 @@
+.login-page {
+  min-height: 100dvh;
+  background: var(--gradient-dark-header);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: var(--space-10);
+  color: var(--text-inverse);
+}
+
+.login-logo {
+  width: 72px;
+  height: 72px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-2xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-4);
+  backdrop-filter: blur(10px);
+}
+
+.login-brand {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+}
+
+.login-tagline {
+  font-size: var(--font-size-md);
+  opacity: 0.7;
+  margin-top: var(--space-1);
+}
+
+.login-form {
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.login-form .input-label {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.login-form .input-field {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--text-inverse);
+}
+
+.login-form .input-field::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.login-form .input-field:focus {
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
+}
+
+.login-forgot {
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: var(--space-2);
+}
+
+.login-forgot:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
