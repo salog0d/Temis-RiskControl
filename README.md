@@ -18,6 +18,10 @@ Temis RiskControl combines a **FastAPI async backend** for entity management wit
   - [Stage 2 — Decision Engine](#stage-2--decision-engine)
   - [Stage 3 — Action Engine](#stage-3--action-engine)
 - [Frontend](#frontend)
+- [Observability](#observability)
+  - [Metrics](#metrics)
+  - [Alerting](#alerting)
+  - [Dashboards](#dashboards)
 - [Environment Variables](#environment-variables)
 - [Getting Started](#getting-started)
 - [Running Tests](#running-tests)
@@ -36,6 +40,7 @@ The platform is organized into three primary tracks that operate together:
 | **Backend** | FastAPI · SQLAlchemy (async) · PostgreSQL | CRUD API, webhook ingestion, enforcement endpoints |
 | **Agent** | Google ADK · Gemini 2.5 Flash | Multi-stage risk pipeline: `risk_engine → decision_engine → action_engine` |
 | **Frontend** | React 19 · TypeScript · Vite | Dashboard and transaction monitoring UI |
+| **Observability** | Prometheus · Grafana · AlertManager | Metrics collection, dashboards, and alert routing |
 
 ### Request Flow
 
@@ -70,6 +75,7 @@ POST /api/webhook/transaction
 | **Agent Pipeline** | Google ADK · Gemini 2.5 Flash LLM |
 | **Frontend** | React 19 · TypeScript · Vite · React Router 7 · Framer Motion |
 | **Infrastructure** | Docker · Docker Compose · uvicorn |
+| **Observability** | Prometheus v2.51 · Grafana v10.4 · AlertManager v0.27 |
 | **Testing** | pytest · pytest-asyncio |
 | **CI/CD** | GitHub Actions |
 
@@ -108,6 +114,18 @@ POST /api/webhook/transaction
 │   │   └── components/
 │   ├── package.json
 │   └── vite.config.ts
+├── infra/
+│   ├── prometheus/
+│   │   ├── prometheus.yml                # Scrape config + 15-day retention
+│   │   └── alert_rules.yml               # 4 alert rules (ServiceDown, ErrorRate, Latency, RequestRate)
+│   ├── alertmanager/
+│   │   └── alertmanager.yml              # SMTP routing by severity (critical/warning)
+│   └── grafana/
+│       ├── provisioning/
+│       │   ├── datasources/              # Auto-provisions Prometheus datasource
+│       │   └── dashboards/               # Auto-loads dashboard provider
+│       └── dashboards/
+│           └── temis_overview.json       # Request rate, latency percentiles, handler throughput
 ├── docs/
 │   └── database-design.pdf
 ├── .env.example
@@ -392,6 +410,52 @@ npm run dev
 
 ---
 
+## Observability
+
+The full observability stack (Prometheus, AlertManager, Grafana) starts automatically with Docker Compose and requires no manual setup.
+
+### Metrics
+
+The backend exposes a Prometheus-compatible `/metrics` endpoint via `prometheus-fastapi-instrumentator`. Three metric families are tracked per handler:
+
+| Metric | Description |
+|--------|-------------|
+| `http_requests_total` | Request count, labelled by method, handler, and status code |
+| `http_request_duration_seconds` | Latency histogram (p50 / p95 / p99) |
+| `http_requests_in_progress` | In-flight request gauge |
+
+Prometheus scrapes `/metrics` every **15 seconds** and retains data for **15 days**.
+
+### Alerting
+
+AlertManager routes firing alerts to email using the SMTP credentials from `.env`. Severity determines repeat interval:
+
+| Alert | Condition | Severity | Repeat |
+|-------|-----------|----------|--------|
+| `ServiceDown` | Backend instance unreachable for > 1 min | critical | 1h |
+| `HighErrorRate` | 5xx rate > 5% over 5 min | warning | 4h |
+| `HighP95Latency` | p95 latency > 2s over 5 min | warning | 4h |
+| `HighRequestRate` | Throughput > 500 req/s over 5 min | warning | 4h |
+
+`warning` alerts are automatically suppressed when a `critical` alert with the same `alertname` is already firing (inhibition rule).
+
+### Dashboards
+
+The **Temis Overview** Grafana dashboard is auto-provisioned on container start. It provides four panels:
+
+- **Request rate** — requests/sec split by 2xx / 4xx / 5xx
+- **Latency percentiles** — p50, p95, p99 over time
+- **Top handlers** — top-10 routes by throughput
+- **Service status** — up/down stat panel
+
+| Service | URL |
+|---------|-----|
+| Prometheus | `http://localhost:9090` |
+| AlertManager | `http://localhost:9093` |
+| Grafana | `http://localhost:3000` (default login: `admin` / `admin`) |
+
+---
+
 ## Environment Variables
 
 Copy `.env.example` to `.env` and fill in the required values.
@@ -443,6 +507,18 @@ SMTP_USE_TLS=true
 SMTP_USERNAME=<mailgun-username>
 SMTP_PASSWORD=<mailgun-password>
 SMTP_FROM_ADDRESS=noreply@temis.io
+
+# Postgres (docker-compose)
+POSTGRES_USER=temis
+POSTGRES_PASSWORD=temis
+POSTGRES_DB=temis_db
+
+# Grafana
+GRAFANA_ADMIN_USER=admin
+GRAFANA_ADMIN_PASSWORD=admin
+
+# AlertManager
+ALERT_EMAIL_TO=ops@temis.io
 ```
 
 ---
@@ -455,6 +531,24 @@ SMTP_FROM_ADDRESS=noreply@temis.io
 - PostgreSQL (or SQLite for local dev)
 - Node.js 18+
 - Gemini API key
+- Docker & Docker Compose (for the full observability stack)
+
+### Full Stack (Docker Compose)
+
+The fastest way to run everything — backend, agent, Postgres, Prometheus, AlertManager, and Grafana — in one command:
+
+```bash
+cp .env.example .env        # fill in GEMINI_API_KEY and SMTP credentials
+docker compose up --build
+```
+
+| Service | URL |
+|---------|-----|
+| Backend API | `http://localhost:8000` |
+| Agent Service | `http://localhost:8001` |
+| Prometheus | `http://localhost:9090` |
+| AlertManager | `http://localhost:9093` |
+| Grafana | `http://localhost:3000` |
 
 ### Backend
 
