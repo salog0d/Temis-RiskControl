@@ -1,0 +1,105 @@
+# Temis RiskControl — Test Payloads
+# IDs reales de la base de datos (generados con scripts/seed.py)
+# Endpoint: POST http://localhost:8000/api/webhook/transaction
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── CASO 1 ───────────────────────────────────────────────────────────────────
+# Usuario : carlos.mendoza@gmail.com
+# Riesgo  : BAJO — transacción normal, dispositivo conocido (iPad Air)
+# Esperado: APPROVE
+# ─────────────────────────────────────────────────────────────────────────────
+{
+  "transaction_id": "demo-carlos-01",
+  "user_id": "4100d9bb-40b3-4195-af31-ef24cdd7ce4b",
+  "account_id": "7af4865e-a7a3-49f1-a491-e3cae43ebdf3",
+  "amount": 9500.00,
+  "currency": "MXN",
+  "timestamp": "2026-04-10T14:30:00Z",
+  "amount_history": { "mean": 11007.0, "std": 5800.0 },
+  "velocity": { "count_in_window": 1, "window_minutes": 60, "baseline_rate_per_hour": 1.0 },
+  "device": { "device_id": "4d21cf55-410f-4457-9f9f-68da86204415", "is_known": true, "age_days": 210, "fraud_flags_count": 0 },
+  "geolocation": { "latitude": 19.4326, "longitude": -99.1332 },
+  "beneficiaries": { "new_count_in_window": 0, "window_hours": 24.0, "baseline_new_per_day": 0.5 },
+  "account_changes": { "recent_otp_failures": 0 },
+  "ip": { "address": "189.203.10.55", "is_vpn": false, "is_tor": false, "is_blacklisted": false, "provider_risk_score": 0.04 },
+  "network": { "fraud_network_degree": -1, "connected_flagged_accounts": 0 },
+  "behavior": { "hour_of_day_deviation": 0.05, "channel_deviation": 0.0, "interaction_pattern_deviation": 0.08 }
+}
+
+# ── CASO 2 ───────────────────────────────────────────────────────────────────
+# Usuario : ana.garcia@hotmail.com
+# Riesgo  : MEDIO — monto 4x su historial a las 3am, nuevos beneficiarios
+# Esperado: CHALLENGE (step-up auth)
+# ─────────────────────────────────────────────────────────────────────────────
+{
+  "transaction_id": "demo-ana-01",
+  "user_id": "77d8afdb-44ab-49cd-b7ce-0503129f0985",
+  "account_id": "5addeb22-3269-493d-8fdb-28d5af2a3f36",
+  "amount": 42000.00,
+  "currency": "MXN",
+  "timestamp": "2026-04-10T03:12:00Z",
+  "amount_history": { "mean": 10932.0, "std": 6700.0 },
+  "velocity": { "count_in_window": 4, "window_minutes": 60, "baseline_rate_per_hour": 1.0 },
+  "device": { "device_id": "f5f6aa4b-5aac-4e92-826d-9c5ff5b1b8df", "is_known": true, "age_days": 95, "fraud_flags_count": 0 },
+  "geolocation": { "latitude": 25.6866, "longitude": -100.3161 },
+  "beneficiaries": { "new_count_in_window": 2, "window_hours": 24.0, "baseline_new_per_day": 0.5 },
+  "account_changes": { "recent_otp_failures": 1 },
+  "ip": { "address": "201.145.88.20", "is_vpn": false, "is_tor": false, "is_blacklisted": false, "provider_risk_score": 0.18 },
+  "network": { "fraud_network_degree": -1, "connected_flagged_accounts": 0 },
+  "behavior": { "hour_of_day_deviation": 0.82, "channel_deviation": 0.3, "interaction_pattern_deviation": 0.35 }
+}
+
+# ── CASO 3 ───────────────────────────────────────────────────────────────────
+# Usuario : andres.gomez@hotmail.com (status: suspended en DB)
+# Riesgo  : CRÍTICO — viaje imposible Monterrey→Madrid en 25 min,
+#           IP Tor+blacklist, cuenta comprometida, monto 10x historial
+# Esperado: DECLINE + FREEZE (bloqueo + invalidar sesiones)
+# ─────────────────────────────────────────────────────────────────────────────
+{
+  "transaction_id": "demo-andres-01",
+  "user_id": "ca584053-066e-449a-a302-835d72f01a27",
+  "account_id": "e4885055-0492-4d58-8b67-447590a4eccb",
+  "amount": 95000.00,
+  "currency": "MXN",
+  "timestamp": "2026-04-10T04:45:00Z",
+  "amount_history": { "mean": 8853.0, "std": 4200.0 },
+  "velocity": { "count_in_window": 7, "window_minutes": 60, "baseline_rate_per_hour": 1.0 },
+  "device": { "device_id": "a0f6e6a6-e3cf-458e-9a24-d7e78a97e0c5", "is_known": false, "age_days": 0, "fraud_flags_count": 3 },
+  "geolocation": {
+    "latitude": 40.4168, "longitude": -3.7038,
+    "prev_latitude": 25.6866, "prev_longitude": -100.3161,
+    "time_delta_minutes": 25
+  },
+  "beneficiaries": { "new_count_in_window": 4, "window_hours": 24.0, "baseline_new_per_day": 0.5 },
+  "account_changes": {
+    "password_changed_hours_ago": 2.0,
+    "email_changed_hours_ago": 1.5,
+    "recent_otp_failures": 5
+  },
+  "ip": { "address": "185.220.101.5", "is_vpn": true, "is_tor": true, "is_blacklisted": true, "provider_risk_score": 0.97 },
+  "network": { "fraud_network_degree": 1, "connected_flagged_accounts": 3 },
+  "behavior": { "hour_of_day_deviation": 0.95, "channel_deviation": 0.91, "interaction_pattern_deviation": 0.96 }
+}
+
+# ── CASO 4 ───────────────────────────────────────────────────────────────────
+# Usuario : diego.medina@protonmail.com
+# Riesgo  : BAJO — monto alto pero historial lo justifica, Huawei P60 conocido
+# Esperado: APPROVE (falso positivo demostrado)
+# ─────────────────────────────────────────────────────────────────────────────
+{
+  "transaction_id": "demo-diego-01",
+  "user_id": "2ae78762-c223-4891-97a7-d4e0b1298927",
+  "account_id": "2199ce2f-6252-4ce9-add0-a12d3f60d8b5",
+  "amount": 16000.00,
+  "currency": "MXN",
+  "timestamp": "2026-04-10T11:00:00Z",
+  "amount_history": { "mean": 11043.0, "std": 5500.0 },
+  "velocity": { "count_in_window": 1, "window_minutes": 60, "baseline_rate_per_hour": 1.0 },
+  "device": { "device_id": "7e59b2db-3780-46ae-a8b1-ee1c5e069a7f", "is_known": true, "age_days": 320, "fraud_flags_count": 0 },
+  "geolocation": { "latitude": 19.4326, "longitude": -99.1332 },
+  "beneficiaries": { "new_count_in_window": 0, "window_hours": 24.0, "baseline_new_per_day": 0.5 },
+  "account_changes": { "recent_otp_failures": 0 },
+  "ip": { "address": "187.190.44.12", "is_vpn": false, "is_tor": false, "is_blacklisted": false, "provider_risk_score": 0.03 },
+  "network": { "fraud_network_degree": -1, "connected_flagged_accounts": 0 },
+  "behavior": { "hour_of_day_deviation": 0.06, "channel_deviation": 0.04, "interaction_pattern_deviation": 0.05 }
+}
