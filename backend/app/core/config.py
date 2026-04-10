@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     app_version: str = "0.1.0"
     debug: bool = False
     database_url: str = "sqlite+aiosqlite:///./temis.db"
-    agent_service_url: str = "http://agent:8001"
+    agent_service_url: str = "http://agent:9000"
 
     # SMTP — used by the enforcement notification service
     smtp_host: str = "smtp.mailgun.org"
