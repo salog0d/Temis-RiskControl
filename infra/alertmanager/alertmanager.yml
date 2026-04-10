@@ -1,0 +1,40 @@
+global:
+  resolve_timeout: 5m
+  smtp_smarthost: "${SMTP_HOST}:${SMTP_PORT}"
+  smtp_from: "${SMTP_FROM_ADDRESS}"
+  smtp_auth_username: "${SMTP_USERNAME}"
+  smtp_auth_password: "${SMTP_PASSWORD}"
+  smtp_require_tls: true
+
+route:
+  group_by: ["alertname", "severity"]
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+  receiver: ops-email
+
+  routes:
+    - matchers:
+        - severity = "critical"
+      receiver: ops-email
+      repeat_interval: 1h
+
+    - matchers:
+        - severity = "warning"
+      receiver: ops-email
+      repeat_interval: 4h
+
+receivers:
+  - name: ops-email
+    email_configs:
+      - to: "${ALERT_EMAIL_TO}"
+        send_resolved: true
+        headers:
+          Subject: "[Temis] {{ .Status | toUpper }} — {{ .CommonAnnotations.summary }}"
+
+inhibit_rules:
+  - source_matchers:
+      - severity = "critical"
+    target_matchers:
+      - severity = "warning"
+    equal: ["alertname"]
