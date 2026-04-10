@@ -659,6 +659,98 @@ All payload JSONs are also available in `scripts/test_payloads.txt` for use in P
 docker-compose logs agent --tail=50
 ```
 
+#### 4. Sample pipeline execution
+
+The following is an annotated excerpt from a real demo run against the four seeded profiles. Each profile triggers a distinct pipeline path through all three stages.
+
+---
+
+**Profile 1 — Low risk → `approve`** (`carlos.mendoza@gmail.com`)
+
+```
+2026-04-10 22:49:06  New session created: 7a0478eb-ffaf-4def-a197-1658cdeaae77
+2026-04-10 22:49:06  Sending out request, model: gemini-2.5-flash   # Stage 1: Risk Engine
+2026-04-10 22:49:11  Response received from the model.
+2026-04-10 22:49:11  Sending out request, model: gemini-2.5-flash   # Stage 1: tool calls
+2026-04-10 22:49:13  Response received from the model.
+2026-04-10 22:49:13  Sending out request, model: gemini-2.5-flash   # Stage 2: Decision Engine
+2026-04-10 22:49:19  Response received from the model.
+2026-04-10 22:49:19  Sending out request, model: gemini-2.5-flash   # Stage 3: Action Engine
+2026-04-10 22:49:28  Response received from the model.
+2026-04-10 22:49:28  Sending out request, model: gemini-2.5-flash
+2026-04-10 22:49:33  Response received from the model.
+2026-04-10 22:49:33  Generated 7 events in agent run
+POST /run  200 OK
+```
+
+---
+
+**Profile 2 — Medium risk → `challenge`** (`ana.garcia@hotmail.com`)
+
+```
+2026-04-10 22:49:33  New session created: c0511d8d-434d-42f4-b66b-d43d27fc52cc
+2026-04-10 22:49:33  Sending out request, model: gemini-2.5-flash   # Stage 1: Risk Engine
+2026-04-10 22:49:39  Response received from the model.
+2026-04-10 22:49:39  Sending out request, model: gemini-2.5-flash   # Stage 1: tool calls
+2026-04-10 22:49:41  Response received from the model.
+2026-04-10 22:49:41  Sending out request, model: gemini-2.5-flash   # Stage 2: Decision Engine
+2026-04-10 22:49:47  Response received from the model.
+2026-04-10 22:49:47  Sending out request, model: gemini-2.5-flash   # Stage 3: Action Engine
+2026-04-10 22:50:00  Response received from the model.
+2026-04-10 22:50:00  Sending out request, model: gemini-2.5-flash
+2026-04-10 22:50:05  Response received from the model.
+2026-04-10 22:50:05  Generated 7 events in agent run
+POST /run  200 OK
+```
+
+---
+
+**Profile 3 — Critical risk → `decline` + freeze** (`andres.gomez@hotmail.com`)
+
+This run generates 11 events — the additional turns correspond to the Action Engine executing `block_account` and `send_incident_email` against the enforcement API.
+
+```
+2026-04-10 22:50:05  New session created: 80b92499-95ec-4517-9692-8b116ac562fa
+2026-04-10 22:50:05  Sending out request, model: gemini-2.5-flash   # Stage 1: Risk Engine
+2026-04-10 22:50:11  Response received from the model.
+2026-04-10 22:50:11  Sending out request, model: gemini-2.5-flash   # Stage 1: tool calls
+2026-04-10 22:50:13  Response received from the model.
+2026-04-10 22:50:13  Sending out request, model: gemini-2.5-flash   # Stage 2: Decision Engine
+2026-04-10 22:50:20  Response received from the model.
+2026-04-10 22:50:20  Sending out request, model: gemini-2.5-flash   # Stage 3: Action Engine
+2026-04-10 22:50:27  Response received from the model.
+2026-04-10 22:50:27  Sending out request, model: gemini-2.5-flash
+2026-04-10 22:50:30  Response received from the model.
+2026-04-10 22:50:30  HTTP Request: PATCH  /api/cuentas/{id}           200 OK   ← block_account
+2026-04-10 22:50:30  Sending out request, model: gemini-2.5-flash
+2026-04-10 22:50:32  Response received from the model.
+2026-04-10 22:50:32  HTTP Request: POST   /api/enforcement/notify-email  202 Accepted   ← fraud alert email
+2026-04-10 22:50:32  Sending out request, model: gemini-2.5-flash
+2026-04-10 22:50:37  Response received from the model.
+2026-04-10 22:50:37  Generated 11 events in agent run
+POST /run  200 OK
+```
+
+---
+
+**Profile 4 — Low risk (false positive check) → `approve`** (`diego.medina@protonmail.com`)
+
+```
+2026-04-10 22:50:37  New session created: 3b99e482-c1b6-4f7b-8f70-7eac028644f6
+2026-04-10 22:50:37  Sending out request, model: gemini-2.5-flash   # Stage 1: Risk Engine
+2026-04-10 22:50:45  Response received from the model.
+2026-04-10 22:50:45  Sending out request, model: gemini-2.5-flash   # Stage 1: tool calls
+2026-04-10 22:50:47  Response received from the model.
+2026-04-10 22:50:47  Sending out request, model: gemini-2.5-flash   # Stage 2: Decision Engine
+2026-04-10 22:50:53  Response received from the model.
+2026-04-10 22:50:53  Sending out request, model: gemini-2.5-flash   # Stage 3: Action Engine
+2026-04-10 22:51:04  Response received from the model.
+2026-04-10 22:51:04  Sending out request, model: gemini-2.5-flash
+2026-04-10 22:51:08  Response received from the model.
+2026-04-10 22:51:08  Generated 7 events in agent run
+POST /run  200 OK
+```
+
 ---
 
 ## CI/CD
@@ -725,5 +817,9 @@ feat(agent): add geolocation scoring tool
 fix(api): handle null response in webhook handler
 docs(readme): update agent pipeline section
 ```
+
+Demo:
+
+Video: https://youtu.be/J20cBAInkV4
 
 ---

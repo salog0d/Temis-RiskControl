@@ -1,0 +1,80 @@
+agent-1  |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+agent-1  |         raw_si, ReadonlyContext(invocation_context)
+agent-1  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+agent-1  |     )
+agent-1  |     ^
+agent-1  |   File "/usr/local/lib/python3.13/site-packages/google/adk/utils/instructions_utils.py", line 124, in inject_session_state
+agent-1  |     return await _async_sub(r'{+[^{}]*}+', _replace_match, template)
+agent-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+agent-1  |   File "/usr/local/lib/python3.13/site-packages/google/adk/utils/instructions_utils.py", line 75, in _async_sub
+agent-1  |     replacement = await repl_async_fn(match)
+agent-1  |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+agent-1  |   File "/usr/local/lib/python3.13/site-packages/google/adk/utils/instructions_utils.py", line 122, in _replace_match
+agent-1  |     raise KeyError(f'Context variable not found: `{var_name}`.')
+agent-1  | KeyError: 'Context variable not found: `risk_assessment`.'
+agent-1  | 2026-04-10 22:49:06,026 - INFO - adk_web_server.py:867 - New session created: 7a0478eb-ffaf-4def-a197-1658cdeaae77
+agent-1  | INFO:     172.18.0.5:40412 - "POST /apps/risk_control_pipeline/users/4100d9bb-40b3-4195-af31-ef24cdd7ce4b/sessions HTTP/1.1" 200 OK
+agent-1  | 2026-04-10 22:49:06,061 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:49:11,199 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:49:11,245 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:49:13,243 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:49:13,287 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:49:19,080 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:49:19,116 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:49:19,116 - INFO - models.py:8296 - AFC is enabled with max remote calls: 10.
+agent-1  | 2026-04-10 22:49:28,914 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:49:28,961 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:49:33,010 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:49:33,015 - INFO - adk_web_server.py:1907 - Generated 7 events in agent run
+agent-1  | INFO:     172.18.0.5:40412 - "POST /run HTTP/1.1" 200 OK
+agent-1  | 2026-04-10 22:49:33,087 - INFO - adk_web_server.py:867 - New session created: c0511d8d-434d-42f4-b66b-d43d27fc52cc
+agent-1  | INFO:     172.18.0.5:40676 - "POST /apps/risk_control_pipeline/users/77d8afdb-44ab-49cd-b7ce-0503129f0985/sessions HTTP/1.1" 200 OK
+agent-1  | 2026-04-10 22:49:33,121 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:49:39,243 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:49:39,290 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:49:41,815 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:49:41,868 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:49:47,755 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:49:47,794 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:49:47,795 - INFO - models.py:8296 - AFC is enabled with max remote calls: 10.
+agent-1  | 2026-04-10 22:50:00,555 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:50:00,604 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:50:05,166 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:50:05,185 - INFO - adk_web_server.py:1907 - Generated 7 events in agent run
+agent-1  | INFO:     172.18.0.5:40676 - "POST /run HTTP/1.1" 200 OK
+agent-1  | 2026-04-10 22:50:05,259 - INFO - adk_web_server.py:867 - New session created: 80b92499-95ec-4517-9692-8b116ac562fa
+agent-1  | INFO:     172.18.0.5:50764 - "POST /apps/risk_control_pipeline/users/ca584053-066e-449a-a302-835d72f01a27/sessions HTTP/1.1" 200 OK
+agent-1  | 2026-04-10 22:50:05,291 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:50:11,307 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:50:11,351 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:50:13,457 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:50:13,501 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:50:20,627 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:50:20,666 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:50:20,666 - INFO - models.py:8296 - AFC is enabled with max remote calls: 10.
+agent-1  | 2026-04-10 22:50:27,383 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:50:27,423 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:50:30,354 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:50:30,385 - INFO - _client.py:1025 - HTTP Request: PATCH http://backend:8000/api/cuentas/e4885055-0492-4d58-8b67-447590a4eccb "HTTP/1.1 200 OK"
+agent-1  | 2026-04-10 22:50:30,416 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:50:32,196 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:50:32,221 - INFO - _client.py:1025 - HTTP Request: POST http://backend:8000/api/enforcement/notify-email "HTTP/1.1 202 Accepted"
+agent-1  | 2026-04-10 22:50:32,252 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:50:37,011 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:50:37,031 - INFO - adk_web_server.py:1907 - Generated 11 events in agent run
+agent-1  | INFO:     172.18.0.5:50764 - "POST /run HTTP/1.1" 200 OK
+agent-1  | 2026-04-10 22:50:37,104 - INFO - adk_web_server.py:867 - New session created: 3b99e482-c1b6-4f7b-8f70-7eac028644f6
+agent-1  | INFO:     172.18.0.5:38648 - "POST /apps/risk_control_pipeline/users/2ae78762-c223-4891-97a7-d4e0b1298927/sessions HTTP/1.1" 200 OK
+agent-1  | 2026-04-10 22:50:37,136 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:50:45,512 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:50:45,557 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:50:47,556 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:50:47,599 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:50:53,496 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:50:53,533 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:50:53,533 - INFO - models.py:8296 - AFC is enabled with max remote calls: 10.
+agent-1  | 2026-04-10 22:51:04,044 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:51:04,088 - INFO - google_llm.py:185 - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+agent-1  | 2026-04-10 22:51:08,345 - INFO - google_llm.py:250 - Response received from the model.
+agent-1  | 2026-04-10 22:51:08,362 - INFO - adk_web_server.py:1907 - Generated 7 events in agent run
+agent-1  | INFO:     172.18.0.5:38648 - "POST /run HTTP/1.1" 200 OK
