@@ -1,0 +1,33 @@
+.card {
+  background: var(--surface-card);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  width: 100%;
+  text-align: left;
+}
+
+.card-gradient {
+  color: var(--text-inverse);
+}
+
+.card-interactive {
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.card-interactive:active {
+  transform: scale(0.98);
+}
+
+.card-interactive:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.card-header {
+  padding: var(--space-4) var(--space-4) var(--space-2);
+}
+
+.card-body {
+  padding: var(--space-2) var(--space-4) var(--space-4);
+}

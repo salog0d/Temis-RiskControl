@@ -1,0 +1,92 @@
+.txn-detail-page {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-card);
+  min-height: 100dvh;
+}
+
+.txn-detail-content {
+  padding: var(--space-4);
+}
+
+.txn-detail-amount-section {
+  padding: var(--space-2) 0 var(--space-3);
+}
+
+.txn-detail-amount {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.txn-detail-amount-blocked {
+  color: var(--color-error);
+  text-decoration: line-through;
+}
+
+.txn-detail-date {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-top: var(--space-1);
+}
+
+.txn-detail-merchant {
+  padding: var(--space-3) 0;
+}
+
+.txn-detail-merchant-name {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-1);
+}
+
+.txn-detail-merchant-address {
+  font-size: var(--font-size-md);
+  color: var(--text-link);
+}
+
+.txn-detail-statement {
+  padding: var(--space-3) 0;
+}
+
+.txn-detail-statement-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-1);
+}
+
+.txn-detail-statement-value {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+.txn-detail-statement-card {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-top: var(--space-1);
+}
+
+.txn-detail-actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.txn-detail-action-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) 0;
+  font-size: var(--font-size-md);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-light);
+  width: 100%;
+  text-align: left;
+}
+
+.txn-detail-action-row:last-child {
+  border-bottom: none;
+}
+
+.txn-detail-action-report {
+  color: var(--color-warning);
+}
