@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  backend-python:
+    name: Backend Python checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install backend dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+
+      - name: Compile Python sources
+        run: python -m compileall backend/app
+
+      - name: FastAPI app smoke check
+        env:
+          PYTHONPATH: backend
+        run: |
+          python - << 'PY'
+          from app.main import app
+
+          paths = {route.path for route in app.routes}
+          assert "/" in paths, "Missing root endpoint"
+          assert "/api/health" in paths, "Missing /api/health endpoint"
+          print("FastAPI app smoke check passed")
+          PY
+
+  docker-build:
+    name: Docker build checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build backend image if Dockerfile is configured
+        run: |
+          if [ -s backend/dockerfile ]; then
+            docker build -f backend/dockerfile -t temis-backend-ci ./backend
+          else
+            echo "Skipping backend image build: backend/dockerfile is empty"
+          fi
+
+      - name: Report skipped Dockerfiles
+        run: |
+          for service in frontend agent; do
+            if [ ! -s "${service}/dockerfile" ]; then
+              echo "${service}/dockerfile is empty (build skipped by design)"
+            fi
+          done
