@@ -10,13 +10,14 @@
 
 .login-header {
   text-align: center;
+  margin-top: 10vh;
   margin-bottom: var(--space-10);
   color: var(--text-inverse);
 }
 
 .login-logo {
-  width: 72px;
-  height: 72px;
+  width: 88px;
+  height: 88px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-2xl);
   display: flex;
