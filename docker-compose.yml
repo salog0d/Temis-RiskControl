@@ -3,8 +3,8 @@ services:
 
   backend:
     build:
-      context: ./backend
-      dockerfile: dockerfile
+      context: .
+      dockerfile: backend/dockerfile
     env_file: .env
     ports:
       - "8000:8000"
@@ -16,11 +16,11 @@ services:
 
   agent:
     build:
-      context: ./agent
-      dockerfile: dockerfile
+      context: .
+      dockerfile: agent/dockerfile
     env_file: .env
     ports:
-      - "8001:8001"
+      - "9000:9000"
     restart: unless-stopped
     networks:
       - temis
