@@ -593,8 +593,70 @@ npm run dev
 
 ## Running Tests
 
+### Unit & Integration Tests
+
 ```bash
 PYTHONPATH=backend pytest backend/tests -v
+```
+
+### End-to-End Pipeline Tests
+
+The `scripts/` directory contains everything needed to test the full risk pipeline against real data.
+
+#### 1. Populate the database
+
+Run the seed script to insert 20 dummy users with accounts, devices, sessions, and transactions:
+
+```bash
+# Requires docker-compose up to be running
+docker cp scripts/seed.py temis-riskcontrol-backend-1:/app/seed.py
+docker exec temis-riskcontrol-backend-1 python seed.py
+```
+
+Expected output:
+
+```
+Seeding 20 usuarios...
+  [01/20] carlos.mendoza@gmail.com — 1 cuenta(s), 1 dispositivo(s), 7 transaccion(es)
+  ...
+  [20/20] alejandra.ruiz@protonmail.com — 1 cuenta(s), 1 dispositivo(s), 3 transaccion(es)
+
+Seed completado.
+```
+
+This creates:
+
+| Table | Records |
+|---|---|
+| usuario | 20 |
+| cuenta | ~29 |
+| dispositivo | ~38 |
+| sesion | ~72 |
+| transaccion | ~144 |
+
+#### 2. Run the end-to-end test cases
+
+```bash
+./scripts/run_tests.sh
+# or with a custom base URL:
+./scripts/run_tests.sh http://localhost:8000
+```
+
+The script sends 4 payloads with real DB IDs through the full pipeline (`Risk Engine → Decision Engine → Action Engine`) and prints the HTTP status and response for each:
+
+| Case | User | Risk | Expected Verdict |
+|---|---|---|---|
+| 1 | `carlos.mendoza@gmail.com` | Low | `approve` |
+| 2 | `ana.garcia@hotmail.com` | Medium | `challenge` |
+| 3 | `andres.gomez@hotmail.com` | Critical | `decline` + freeze |
+| 4 | `diego.medina@protonmail.com` | Low (false positive) | `approve` |
+
+All payload JSONs are also available in `scripts/test_payloads.txt` for use in Postman, Insomnia, or `curl` manually.
+
+#### 3. Inspect agent logs
+
+```bash
+docker-compose logs agent --tail=50
 ```
 
 ---
