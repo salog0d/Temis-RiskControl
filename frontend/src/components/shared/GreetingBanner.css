@@ -1,0 +1,12 @@
+.greeting-banner {
+  background: var(--gradient-dark-header);
+  padding: var(--space-8) var(--space-5) var(--space-6);
+  text-align: center;
+}
+
+.greeting-text {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-inverse);
+  letter-spacing: -0.01em;
+}

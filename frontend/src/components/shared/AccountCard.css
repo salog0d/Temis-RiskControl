@@ -1,0 +1,32 @@
+.account-card {
+  min-height: 110px;
+}
+
+.account-card-inner {
+  padding: var(--space-4) var(--space-5);
+}
+
+.account-card-name {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-2);
+  letter-spacing: 0.02em;
+}
+
+.account-card-balance {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  margin-bottom: var(--space-1);
+}
+
+.account-card-cents {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  vertical-align: super;
+}
+
+.account-card-label {
+  font-size: var(--font-size-sm);
+  opacity: 0.8;
+}
