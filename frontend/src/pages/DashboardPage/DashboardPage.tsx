@@ -32,6 +32,9 @@ export function DashboardPage() {
 
   return (
     <div className="dashboard-page">
+      <div className="dashboard-logo-container">
+        <img src="/images/CapitalOne_Logo.png" alt="Capital One" className="dashboard-top-logo" />
+      </div>
       <GreetingBanner name={user?.name ?? 'User'} />
 
       {/* Pending action banner */}
