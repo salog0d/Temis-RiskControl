@@ -82,3 +82,7 @@ chore(deps): update spring boot version
 * Do not introduce breaking changes without prior discussion
 
 ---
+
+<img width="3585" height="629" alt="Untitled-2026-04-10-1345(1)" src="https://github.com/user-attachments/assets/f4af7d5e-4639-46e7-8a2c-b6cbad6a521c" />
+<img width="2751" height="2017" alt="Untitled-2026-04-10-1345(2)" src="https://github.com/user-attachments/assets/c7dee67a-3626-4b46-847c-ca3024b06e33" />
+
