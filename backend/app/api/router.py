@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 
+from app.api.beneficiarios import router as beneficiarios_router
 from app.api.cuentas import router as cuentas_router
 from app.api.dispositivos import router as dispositivos_router
 from app.api.health import router as health_router
@@ -10,3 +11,4 @@ api_router.include_router(health_router)
 api_router.include_router(usuarios_router)
 api_router.include_router(cuentas_router)
 api_router.include_router(dispositivos_router)
+api_router.include_router(beneficiarios_router)
