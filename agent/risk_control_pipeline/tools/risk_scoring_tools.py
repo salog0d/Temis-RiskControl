@@ -134,6 +134,9 @@ def score_geolocation_anomaly(
     Returns:
         dict with 'score' (0.0=plausible, 1.0=impossible travel) and 'detail'.
     """
+    if prev_latitude is None or prev_longitude is None or time_delta_minutes is None:
+        return {"score": 0.0, "detail": "No previous location — cannot assess travel."}
+
     distance_km = _haversine_km(
         prev_latitude, prev_longitude, current_latitude, current_longitude
     )
