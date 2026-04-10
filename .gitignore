@@ -1,0 +1,62 @@
+# Environment
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+backend/.venv/
+.temis-riskcontrol/
+
+# Build/dist
+build/
+dist/
+site/
+
+# Logs/runtime
+*.log
+*.pid
+*.out
+*.err
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node/frontend
+node_modules/
+.npm/
+.pnpm-store/
+.next/
+.nuxt/
+.svelte-kit/
+
+# Docker
+*.tar
