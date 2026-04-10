@@ -3,6 +3,34 @@
    Mobile-first, Capital One-inspired
    ================================================ */
 
+@font-face {
+  font-family: 'Optimist';
+  src: url('/fonts/optimist-normal.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Optimist';
+  src: url('/fonts/optimist-italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Optimist';
+  src: url('/fonts/optimist-bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Optimist';
+  src: url('/fonts/optimist-bold-italic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+
 :root {
   /* ── Primary palette (Capital One dark navy) ── */
   --color-primary-900: #0a1628;
@@ -62,7 +90,7 @@
   --border-focus: #2980b9;
 
   /* ── Typography ── */
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family: 'Optimist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-size-xs: 0.6875rem;    /* 11px */
   --font-size-sm: 0.8125rem;    /* 13px */
   --font-size-md: 0.9375rem;    /* 15px */
