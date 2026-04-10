@@ -3,6 +3,19 @@
   flex-direction: column;
 }
 
+.dashboard-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-4) 0 var(--space-2);
+  background: var(--color-primary-900);
+}
+
+.dashboard-top-logo {
+  height: 40px;
+  width: auto;
+}
+
 .dashboard-pending {
   display: flex;
   align-items: center;

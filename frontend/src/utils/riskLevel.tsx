@@ -1,8 +1,11 @@
+import type { ReactNode } from 'react'
+import { TickCircle, SecuritySafe, CloseCircle, Lock } from 'iconsax-react'
+
 export interface RiskDisplay {
   label: string
   color: string
   bgColor: string
-  icon: string
+  icon: ReactNode
 }
 
 const RISK_DISPLAY_MAP: Record<string, RiskDisplay> = {
@@ -10,25 +13,25 @@ const RISK_DISPLAY_MAP: Record<string, RiskDisplay> = {
     label: 'Approved',
     color: 'var(--color-risk-low)',
     bgColor: 'var(--color-risk-low-bg)',
-    icon: '✅',
+    icon: <TickCircle size="18" variant="Bold" color="currentColor" />,
   },
   medium: {
     label: 'Verified',
     color: 'var(--color-risk-medium)',
     bgColor: 'var(--color-risk-medium-bg)',
-    icon: '🔐',
+    icon: <SecuritySafe size="18" variant="Bold" color="currentColor" />,
   },
   high: {
     label: 'Blocked',
     color: 'var(--color-risk-high)',
     bgColor: 'var(--color-risk-high-bg)',
-    icon: '🚫',
+    icon: <CloseCircle size="18" variant="Bold" color="currentColor" />,
   },
   critical: {
     label: 'Frozen',
     color: 'var(--color-risk-critical)',
     bgColor: 'var(--color-risk-critical-bg)',
-    icon: '🔒',
+    icon: <Lock size="18" variant="Bold" color="currentColor" />,
   },
 }
 
@@ -36,7 +39,7 @@ const DEFAULT_DISPLAY: RiskDisplay = {
   label: 'Unknown',
   color: 'var(--text-secondary)',
   bgColor: 'transparent',
-  icon: '❓',
+  icon: <SecuritySafe size="18" variant="Outline" color="currentColor" />,
 }
 
 /**
