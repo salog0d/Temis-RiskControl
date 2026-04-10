@@ -1,23 +1,84 @@
+## Contribution Guidelines
+
+Clear and consistent contributions are required to maintain code quality and development speed.
+
 ---
 
-## Contribution Rules
+## Pull Requests (PRs)
 
-<img width="663" height="102" alt="Contribution Rules" src="https://github.com/user-attachments/assets/f6ec0d86-6ec0-47c2-bfb4-524a1146f291" />  
+### Naming Convention
 
-### Pull Requests
+Use the format:
 
-* Follow the naming convention: **`Sprint#-TicketName`**
-  * Example: `Sprint2-ImplementarRegistroLogin`
-* Keep PRs small and focused (1 feature/fix per PR).
+```
+Sprint#-ShortDescription
+```
 
-### Commits
+Examples:
 
-* Commit **each file separately** with a **brief but clear description**.
-  * Example: `feat(auth): add login endpoint`
-* Use [Conventional Commits](https://www.conventionalcommits.org/) style where possible:
-  * `feat:` → new feature  
-  * `fix:` → bug fix  
-  * `docs:` → documentation updates  
-  * `chore:` → maintenance tasks  
+* `Sprint2-ImplementLogin`
+* `Sprint3-AddFraudDetectionRules`
+
+### Rules
+
+* One PR should contain only one feature or fix
+* Keep PRs small and easy to review
+* Every PR must include:
+
+  * Clear description of the change
+  * Context explaining why it is needed
+  * Evidence if applicable (screenshots, logs, etc.)
+
+---
+
+## Commits
+
+### Structure (Conventional Commits)
+
+```
+<type>(scope): short description
+```
+
+### Types
+
+* `feat:` new feature
+* `fix:` bug fix
+* `docs:` documentation updates
+* `chore:` maintenance or dependencies
+* `refactor:` internal code improvements
+* `test:` tests added or updated
+
+### Examples
+
+```
+feat(auth): add login endpoint
+fix(api): handle null response in transaction service
+docs(readme): update setup instructions
+chore(deps): update spring boot version
+```
+
+---
+
+## Best Practices
+
+* Commit per logical change, not large batches
+* Keep messages concise and explicit
+* Avoid vague messages such as:
+
+  * `fix stuff`
+  * `update`
+* Prefer descriptive messages:
+
+  * `fix(auth): validate JWT expiration`
+  * `feat(risk): add anomaly scoring`
+
+---
+
+## Code Quality Expectations
+
+* Follow established architecture and naming conventions
+* Ensure code compiles and runs correctly
+* Tests must pass when applicable
+* Do not introduce breaking changes without prior discussion
 
 ---
