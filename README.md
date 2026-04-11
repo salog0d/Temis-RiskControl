@@ -821,6 +821,6 @@ docs(readme): update agent pipeline section
 Demo:
 
 Video: https://youtu.be/J20cBAInkV4
-Presentation video: https://drive.google.com/file/d/19rczYk1xrOoeZWB98lUPit3C1xI7Ywnw/view?usp=sharing
+Presentation video: https://drive.google.com/drive/folders/19PIWKUz-K77d2foXA8Tm2pn449zJo_CI?usp=drive_link
 
 ---
