@@ -37,7 +37,7 @@ export function LoginPage() {
     <div className="login-page">
       <div className="login-header">
         <div className="login-logo">
-          <Shield size={40} strokeWidth={1.5} />
+          <Shield size={60} strokeWidth={1.5} />
         </div>
         <h1 className="login-brand">Temis</h1>
         <p className="login-tagline">Secure Banking</p>

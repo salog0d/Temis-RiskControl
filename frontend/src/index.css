@@ -3,32 +3,57 @@
    Mobile-first, Capital One-inspired
    ================================================ */
 
+/* Regular (400) */
 @font-face {
   font-family: 'Optimist';
-  src: url('/fonts/optimist-normal.ttf') format('truetype');
+  src: url('/fonts/optimist-normal.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Optimist';
-  src: url('/fonts/optimist-italic.ttf') format('truetype');
+  src: url('/fonts/optimist-italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
+  font-display: swap;
 }
 
+/* Medium (500) — maps to the normal file so the browser
+   doesn't fall back to a system font for this weight */
 @font-face {
   font-family: 'Optimist';
-  src: url('/fonts/optimist-bold.ttf') format('truetype');
+  src: url('/fonts/optimist-normal.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Semibold (600) — maps to the bold file */
+@font-face {
+  font-family: 'Optimist';
+  src: url('/fonts/optimist-bold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Bold (700) */
+@font-face {
+  font-family: 'Optimist';
+  src: url('/fonts/optimist-bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Optimist';
-  src: url('/fonts/optimist-bold-italic.ttf') format('truetype');
+  src: url('/fonts/optimist-bold-italic.woff2') format('woff2');
   font-weight: 700;
   font-style: italic;
+  font-display: swap;
 }
 
 :root {

@@ -5,6 +5,7 @@
 
 .account-detail-header {
   margin: var(--space-4);
+  width: auto;
   border-radius: var(--radius-xl);
 }
 
